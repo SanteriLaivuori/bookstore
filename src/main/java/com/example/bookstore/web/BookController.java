@@ -1,6 +1,6 @@
 package com.example.bookstore.web;
 
-public class BookstoreController {
+public class BookController {
 
 	
 	
