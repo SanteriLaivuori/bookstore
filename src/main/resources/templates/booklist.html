@@ -6,9 +6,16 @@
 <title>Booklist</title>
 </head>
 <body>
+<div class="col-md-12">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-12" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
 	<table class="table table-striped">
 		<tr>
-			<h1>Booklist:</h1>
+			<h1 th:inline="text">Booklist:</h1>
 			<th>ID:</th>
 			<th>Author:</th>
 			<th>Title:</th>
@@ -16,7 +23,7 @@
 			<th>Year:</th>
 			<th>Price:</th>
 			<th>Category:</th>
-
+	<th sec:authorize="hasRole('ADMIN')"> </th>
 		</tr>
 		<tr th:each="book : ${book}">
 			<td th:text="${book.id}"></td>
@@ -26,7 +33,7 @@
 			<td th:text="${book.year}"></td>
 			<td th:text="${book.price}"></td>
 			<td th:text="${book.category.name}"></td>
-			<td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
 			<td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-success">Edit</a></td>
 		</tr>
 
